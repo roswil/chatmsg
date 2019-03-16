@@ -1,21 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Injectable } from '@angular/core';
 import {User} from '../interfaces/user';
-
-@Component({
-  selector: 'app-conversation',
-  templateUrl: './conversation.component.html',
-  styleUrls: ['./conversation.component.css']
+@Injectable({
+  providedIn: 'root'
 })
-export class ConversationComponent implements OnInit {
-  friendId:any;
+export class UserService {
   friends: User[];
-  friend:User;
-
-  constructor(private activatedRoute: ActivatedRoute) { 
-    this.friendId=this.activatedRoute.snapshot.params['uid']
-    console.log(this.friendId);
-
+  constructor() {
     let myUser:User={
       nick :'Rosmery',
       //subnick:'Roswil',//por la interogacion se ovia
@@ -61,14 +51,9 @@ export class ConversationComponent implements OnInit {
       uid: 6
     };
     this.friends=[usuario1,usuario2,usuario3,usuario5,myUser];
-    this.friend=this.friends.find(record=>{
-      return record.uid==this.friendId;
-    });
-    console.log(this.friend);
+   }
 
-  }
-
-  ngOnInit() {
-  }
-
+   getFriends(){
+     return this.friends;
+   }
 }
